@@ -1,2 +1,3 @@
 #!/bin/bash
-less /etc/passwd less /etc/hosts
+less /etc/passwd 
+less /etc/hosts
