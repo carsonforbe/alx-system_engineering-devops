@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#creates rsa key pair
+
+ssh-keygen -b 4096 -f -t rsa -N betty
