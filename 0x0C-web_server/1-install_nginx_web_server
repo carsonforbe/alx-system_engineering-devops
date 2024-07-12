@@ -14,7 +14,7 @@ sudo service nginx start
 sudo ufw allow 'Nginx HTTP'
 
 #Give user required permisions
-sudo chown -R "$USER":"USER" /var/www/html
+sudo chown -R "$USER":"$USER" /var/www/html
 sudo chmod -R 755 /var/www
 
 #backup default index
