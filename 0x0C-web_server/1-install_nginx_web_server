@@ -2,7 +2,28 @@
 # installs nginx and configure it to listen on port 80
 # print "Hello World"
 
-sudo apt-get -y update
-sudo apt-get -y install nginx
-echo 'Hello World!' > /var/www/html/index.nginx-debian.html
+echo -e "Updating and Installing NGINX.\n"
+sudo apt-get update -y -qq && \ sudo apt-get install nginx -y
+
+echo -e  "\nStarting setup and configuration.\n"
+
+#start nginx
 sudo service nginx start
+
+#allow nginx on firewall
+sudo ufw allow 'Nginx HTTP'
+
+#Give user required permisions
+sudo chown -R "$USER":"USER" /var/www/html
+sudo chmod -R 755 /var/www
+
+#backup default index
+cp /var/www/html/index.nginx-debian.html /var/ww/html/index.nginx-debian.html.bcp
+
+#create new index
+echo -e "Hello World!" | dd status=none of=/var/www/html/index.nginx-debian.html
+
+#restart nginx
+sudo service nginx restart
+
+echo -e "\nProccess Completed.\n"
