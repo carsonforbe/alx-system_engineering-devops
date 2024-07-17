@@ -1,5 +1,5 @@
-#!usr/bin/env bash
-#configuring web01 to have an http response header
+#!/usr/bin/env bash
+# configuring web01 to have an http response header
 
 #updating packages and installing nginx
 sudo apt-get update
