@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env bash
 #customization of 404-error_page
 
 #updating packages and installing nginx
