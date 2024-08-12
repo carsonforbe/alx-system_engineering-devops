@@ -1,0 +1,52 @@
+1. DNS Request
+
+When you enter https://www.google.com, the first step is to resolve the domain name into an IP address. This process is managed by the Domain Name System (DNS). Here’s how it works:
+
+    Local DNS Cache: Your browser checks if the IP address for www.google.com is stored in its local DNS cache. If it is, the browser uses this cached IP address to make the request.
+
+    DNS Resolver: If the IP address isn’t cached locally, the request is sent to a DNS resolver, often provided by your ISP (Internet Service Provider). The resolver queries various DNS servers to find the authoritative DNS server for google.com.
+
+    Root and Authoritative DNS Servers: The resolver first contacts a root DNS server, which directs it to a Top-Level Domain (TLD) server for .com. The TLD server then points to Google's authoritative DNS server, which provides the IP address for www.google.com.
+
+    Caching: Once the resolver obtains the IP address, it returns it to your browser and stores it in its cache to speed up future requests.
+
+2. TCP/IP Connection
+
+With the IP address in hand, your browser needs to establish a connection to the web server using TCP/IP (Transmission Control Protocol/Internet Protocol). Here’s how this works:
+
+    TCP Handshake: Your browser initiates a TCP connection to the web server's IP address. This involves a three-way handshake:
+        SYN: The browser sends a SYN (synchronize) packet to the server.
+        SYN-ACK: The server responds with a SYN-ACK (synchronize-acknowledge) packet.
+        ACK: The browser sends an ACK (acknowledge) packet back to the server.
+
+    IP Addressing: IP addresses are used to route packets of data between your device and the server, ensuring they reach the correct destination.
+
+3. Firewall
+
+Before the data reaches the web server, it might pass through several firewalls. Firewalls are security systems that monitor and control incoming and outgoing network traffic based on predetermined security rules. They can block or allow traffic based on factors like IP address, port number, and protocol.
+4. HTTPS/SSL
+
+Since you are accessing the site using https, the connection is encrypted using HTTPS (HyperText Transfer Protocol Secure). Here’s how it works:
+
+    TLS/SSL Handshake: After establishing a TCP connection, your browser and the web server perform a TLS (Transport Layer Security) or SSL (Secure Sockets Layer) handshake to establish a secure connection. This involves:
+        Server Authentication: The server presents its SSL certificate, which includes its public key and is verified by a trusted Certificate Authority (CA).
+        Session Keys: Both parties agree on a symmetric session key to encrypt the data transmitted during the session.
+
+    Encryption: Once the secure connection is established, data transferred between your browser and the server is encrypted, protecting it from eavesdropping and tampering.
+
+5. Load Balancer
+
+If the request is to a large service like Google, it will likely pass through a load balancer. Load balancers distribute incoming traffic across multiple servers to ensure no single server becomes overwhelmed. This improves performance, reliability, and availability. The load balancer directs your request to the most appropriate web server based on various factors, such as current load and server health.
+6. Web Server
+
+The web server receives your request and processes it. It is responsible for serving static content like HTML, CSS, JavaScript files, and images. For www.google.com, the web server handles the initial request and forwards it to the appropriate application server if necessary.
+7. Application Server
+
+The application server is where the main logic of the web application resides. It processes dynamic requests, such as querying a database or running server-side scripts. For example, Google’s application servers handle complex tasks like generating search results, managing user sessions, and processing queries.
+8. Database
+
+If the request involves retrieving or storing data, the application server interacts with a database. The database holds information such as user profiles, search indexes, or content. The application server sends a query to the database, retrieves the necessary data, and sends it back to the web server, which then sends the response to your browser.
+9. Response Back to Browser
+
+Finally, the web server sends the response back through the load balancer, firewall, and TCP/IP layers to your browser. The browser receives the data, decrypts it (if using HTTPS), and renders the webpage for you to view and interact with.
+
