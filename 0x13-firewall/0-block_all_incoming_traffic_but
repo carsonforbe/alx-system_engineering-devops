@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 #configures ufw firewall to block all incoming traffic except tcp 22 433 80
 
-sudo apt-get install ufw
-sed -i 's/IPV6=.*/IPV6=yes/' /etc/default/ufw
-ufw disable
-ufw enable
-ufw default deny incoming
-ufw default allow outgoing
-ufw allow 22/tcp
-ufw allow 433/tcp
-ufw allow 80/tcp
+sudo ufw reset
+sudo ufw default deny incoming
+sudo ufw allow 22/tcp
+sudo ufw allow 433/tcp
+sudo ufw allow 80/tcp
+sudo ufw enable
