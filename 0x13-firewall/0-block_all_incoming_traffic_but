@@ -1,9 +1,19 @@
 #!/usr/bin/env bash
 #configures ufw firewall to block all incoming traffic except tcp 22 433 80
 
+<<<<<<< HEAD
 sudo ufw reset
 sudo ufw default deny incoming
 sudo ufw allow 22/tcp
 sudo ufw allow 433/tcp
 sudo ufw allow 80/tcp
+=======
+sudo apt-get install ufw
+
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 80/tcp
+sudo ufw allow 433/tcp
+sudo ufw allow 22/tcp
+>>>>>>> 25b6ba11134c10650c11dc8a1877d208fb7b2eda
 sudo ufw enable
