@@ -18,7 +18,7 @@ if __name__ == "__main__":
     for i in data2:
         if i.get('id') == int(argv[1]):
             employee = i.get('name')
- 
+
     for i in data:
         if i.get('userId') == int(argv[1]):
             total += 1
@@ -32,5 +32,4 @@ if __name__ == "__main__":
     ))
 
     for i in tasks:
-        print("\t {}".format(i))
-        
+        print("\t {}".format(i))        
