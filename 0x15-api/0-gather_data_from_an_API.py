@@ -1,21 +1,35 @@
 #!/usr/bin/python3
+
 """Returns info about a user todo list"""
-import requests
+
+from requests import get
 from sys import argv
 
 
 if __name__ == "__main__":
-    user_id = argv[1]
+    responce = get('https://jsonplaceholder.typicode.com/todos/')
+    data = responce.json()
+    completed = 0
+    total = 0
+    tasks = []
+    responce2 = get('https://jsonplaceholder.typicode.com/users')
+    data2 = responce2.json()
 
-    url = "https://jsonplaceholder.typicode.com/"
-    uri_id = "users/{}".format(user_id)
-    uri_todos = "todos"
+    for i in data2:
+        if i.get('id') == int(argv[1]):
+            employee = i.get('name')
+    
+    for i in data:
+        if i.get('userId') == int(argv[1]):
+            total += 1
 
-    user = requests.get(url + uri_id).json()
-    tasks = requests.get(url + uri_id + uri_todos, params={"userId": user_id}).json()
+            if i.get('completed') is True:
+                completed += 1
+                tasks.append(i.get('title'))
 
-    tasks_completed = [task for task in tasks if task.get("completed") is True]
+    print("Employee {} is done with tasks({}/{}):".format(
+        employee, completed, total
+    ))
 
-    print("Employee {} is done with task({}/{}):".format(user.get("name"), len(tasks_completed), len(tasks)))
-
-    [print("\t {}".format(task.get("title"))) for task in tasks_completed]
+    for i in tasks:
+        print("\t {}".format(i))
