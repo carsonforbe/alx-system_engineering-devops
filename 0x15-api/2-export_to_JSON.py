@@ -39,4 +39,3 @@ if __name__ == "__main__":
 
     with open(argv[1] + ".json",  "w") as f:
         f.write(json_obj)
-
