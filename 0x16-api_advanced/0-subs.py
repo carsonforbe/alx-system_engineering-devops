@@ -4,7 +4,7 @@
 importing requests module
 """
 
-from requests import get
+import requests
 
 
 def number_of_subscribers(subreddit):
@@ -13,16 +13,12 @@ def number_of_subscribers(subreddit):
     10 hot posts listed for a given subreddit
     """
 
-    if subreddit is None or not isinstance(subreddit, str):
-        return 0
+    req = requests.get(
+        "https://www.reddit.com/r/{}/about.json".format(subreddit),
+        headers={"User-agent": "Custom"}
+    )
 
-    user_agent = {'User-agent': 'Google Chrome Version 81.0.4044.129'}
-    url = 'https://www.reddit.com/r/{}/about/.json'.format(subreddit)
-    response = get(url, headers=user_agent)
-    all_data = response.json()
-
-    try:
-        return all_data.get('data').get('subscribers')
-
-    except:
+    if req.status_code == 200:
+        return req.json().get("data").get("subscribers")
+    else:
         return 0
