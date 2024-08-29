@@ -1,4 +1,3 @@
 #!/bin/env bash
 #connects to the following ip with the key in the specified path
 ssh -i ~/.ssh/school ubuntu@18.206.206.12
-
