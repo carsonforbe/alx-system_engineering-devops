@@ -8,6 +8,7 @@ def top_ten(subreddit):
     Query the Reddit API and prints the titles of the first 10 hot posts
     listed for a given subreddit
     """
+
     if subreddit is None or isinstance(subreddit, str):
         print('None')
 
