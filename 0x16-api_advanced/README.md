@@ -1,5 +1,4 @@
 # 0x16. API advanced
-
 ## Resources:books:
 Read or watch:
 * [Reddit API Documentation](https://intranet.hbtn.io/rltoken/odMvR9obKnQCx5EaM6_YFA)
