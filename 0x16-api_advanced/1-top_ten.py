@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Define top_ten function"""
-import requests
+from requests import get
 
 
 def top_ten(subreddit):
@@ -8,17 +8,21 @@ def top_ten(subreddit):
     Query the Reddit API and prints the titles of the first 10 hot posts
     listed for a given subreddit
     """
+    if subreddit is None or isinstance(subreddit, str):
+        print('None')
+
+    user_agent = {'User-agent': 'Google Chrome Version 81.0.4044.129'}
+    params = {'limit': 10}
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    headers = {
-        "User-Agent": "linux:0x016.project:v1.0.0 (by /u/ecalvoc)"
-        }
-    params = {"limit": 10}
-    top_data = requests.get(url,
-                            headers=headers,
-                            params=params,
-                            allow_redirects=False).json().get("data")
-    if top_data:
-        childrens = top_data.get("children")
-        [print(children.get("data").get("title")) for children in childrens]
-        return
-    print("None")
+
+    response = get(url, headers=user_agent, params=params)
+    all_data = response.json()
+
+    try:
+        raw1 = all_data.get('data').get('children')
+
+        for i in raw1:
+            print(i.get('data').get('title'))
+
+    except:
+        print("None")
