@@ -1,37 +1,24 @@
 #!/usr/bin/python3
-"""
-Script to print hot posts on a given Reddit subreddit.
-"""
-
+"""Define top_ten function"""
 import requests
 
 
 def top_ten(subreddit):
-    """Print the titles of the 10 hottest posts on a given subreddit."""
-    # Construct the URL for the subreddit's hot posts in JSON format
-    url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
-
-    # Define headers for the HTTP request, including User-Agent
+    """
+    Query the Reddit API and prints the titles of the first 10 hot posts
+    listed for a given subreddit
+    """
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     headers = {
-        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
-    }
-
-    # Define parameters for the request, limiting the number of posts to 10
-    params = {
-        "limit": 10
-    }
-
-    # Send a GET request to the subreddit's hot posts page
-    response = requests.get(url, headers=headers, params=params,
-                            allow_redirects=False)
-
-    # Check if the response status code indicates a not-found error (404)
-    if response.status_code == 404:
-        print("None")
+        "User-Agent": "linux:0x016.project:v1.0.0 (by /u/ecalvoc)"
+        }
+    params = {"limit": 10}
+    top_data = requests.get(url,
+                            headers=headers,
+                            params=params,
+                            allow_redirects=False).json().get("data")
+    if top_data:
+        childrens = top_data.get("children")
+        [print(children.get("data").get("title")) for children in childrens]
         return
-
-    # Parse the JSON response and extract the 'data' section
-    results = response.json().get("data")
-
-    # Print the titles of the top 10 hottest posts
-    [print(c.get("data").get("title")) for c in results.get("children")]
+    print("None")
