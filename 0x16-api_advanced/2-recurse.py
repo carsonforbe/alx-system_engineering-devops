@@ -1,5 +1,7 @@
 #!/usr/bin/python3
+
 import requests
+"""imports requests"""
 
 def recurse(subreddit, hot_list=None, after=None):
     """
