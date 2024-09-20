@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+"""imports requests module"""
 import requests
 """imports requests"""
 
