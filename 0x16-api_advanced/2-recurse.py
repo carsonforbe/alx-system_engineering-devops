@@ -2,6 +2,7 @@
 """imports requests"""
 import requests
 
+
 def recurse(subreddit, hot_list=None, after=None):
     """
     Recursively queries the Reddit API and returns a list
@@ -19,7 +20,7 @@ def recurse(subreddit, hot_list=None, after=None):
     params = {"limit": 100, "after": after}
 
     response = requests.get(url, headers=headers,
-                           params=params, allow_redirects=False)
+                            params=params, allow_redirects=False)
 
     if response.status_code == 200:
         data = response.json()
