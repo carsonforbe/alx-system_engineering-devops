@@ -1,35 +1,22 @@
-#!/usr/bin/python3
-"""Defines number of subs"""
 import requests
 
-
 def number_of_subscribers(subreddit):
-    """ Returns the number of subscribers for a given subreddit.
-    If subreddit is invalid, returns 0.
     """
-    # Set a custom User-Agent to avoid "Too Many Requests" errors
-    headers = {'User-Agent': 'myRedditAPIClient/0.1'}
-
-    # Define the URL for Reddit API
-    url = f'https://www.reddit.com/r/{subreddit}/about.json'
+    Queries the Reddit API and returns the number of subsfor a given subrdt.
+    
+    Args:
+        subreddit (str): The name of the subreddit.
+        
+    Returns:
+        int: The number of subs for the subreddit,or 0 if the subrdt invalid.
+    """
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
+    headers = {'User-Agent': 'Reddit subscriber count checker'}
     
     try:
-        # Make the request to the Reddit API
         response = requests.get(url, headers=headers, allow_redirects=False)
-        
-        # Check if the request was successful
-        if response.status_code == 200:
-            # Parse JSON response
-            data = response.json()
-            # Extract the number of subscribers
-            return data.get('data', {}).get('subscribers', 0)
-        elif response.status_code == 302:
-            # If we get a redirect, it indicates an invalid subreddit
-            return 0
-        else:
-            # For any other HTTP errors, assume invalid subreddit
-            return 0
-    except requests.RequestException:
-        # Handle any exceptions that occur during the request
+        response.raise_for_status()#Raise exception for 4xx 5xx status codes
+        data = response.json()
+        return data['data']['subscribers']
+    except (requests.exceptions.HTTPError, KeyError):
         return 0
-
