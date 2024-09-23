@@ -1,6 +1,9 @@
 #!/usr/bin/python3
+
+"""
+imports the requests module
+"""
 import requests
-"""imports requests"""
 
 def number_of_subscribers(subreddit):
     """
